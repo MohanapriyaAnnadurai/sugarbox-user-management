@@ -1,0 +1,26 @@
+{ 
+    "_id" : ObjectId("5ffdb6c0be4db6389c5b830d"), 
+    "string_val" : "Test Admin", 
+    "created_at" : ISODate("2021-01-12T14:48:32.962+0000"), 
+    "time_val" : Timestamp(1610462912, 0), 
+    "serial_no" : NumberInt(123), 
+    "decimal_val" : 1231234566567890800000.0, 
+    "object_val" : {
+        "a" : NumberInt(1), 
+        "b" : NumberInt(1), 
+        "c" : NumberInt(1), 
+        "d" : NumberInt(1), 
+        "e" : NumberInt(1)
+    }, 
+    "array_val" : [
+        "1", 
+        "2", 
+        "3", 
+        "4"
+    ], 
+    "boolean_val" : true, 
+    "null_type" : null, 
+    "float_val" : 1231.34, 
+    "undefined_val" : null, 
+    "regx_expr" : /%Test/
+}

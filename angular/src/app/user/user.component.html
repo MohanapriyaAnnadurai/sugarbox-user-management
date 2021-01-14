@@ -1,0 +1,149 @@
+<div class="board-wrapper">
+<app-header></app-header>
+<div class="user-platform">
+
+    <div class="breadcrumb own-clear">
+      <div class="bd-title">
+        <h4>MANAGE USERS</h4>
+      </div> 
+    </div>
+    
+    <div class="manageuser-project own-clear">
+    
+      <div class="manage-filter">
+        <ul class="manage-filter-ul own-clear">
+          <li class="active"><a [routerLink]="['/users']">USERS</a></li>
+        </ul>
+      </div>
+      <div class="user-action own-clear">
+        <div class="user-dropdown own-clear">
+          <div class="serch-box">
+            <input type="text" name="serch-box" placeholder="Filter by name" [(ngModel)]="FilterUserByName">
+            <i class="fa fa-search" aria-hidden="true" (click)="FilterByName()"></i>
+          </div>
+          <h5 *ngIf="pagedItems.length" class="result-show">Showing: {{(pager.currentPage-1)*10+1}}-
+              {{(pager.currentPage*10) > filteredUsers.length?filteredUsers.length:(pager.currentPage*10)}} 
+              of {{pager.totalPages*10}} Records</h5>
+        </div>
+        <div class="tab-action own-clear">
+          <div class="dropdown organisation-select">
+              <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">{{FilterNameDisplay}}
+              <span class="fa fa-angle-down" aria-hidden="true"></span></button>
+              <ul class="cmon-ul dropdown-menu">
+                <li><a href="javascript:void(0);" (click)="ClientFilter('All')">All Organisations</a></li>
+                <li *ngFor="let client of uniqueArray;"><a href="javascript:void(0);" (click)="ClientFilter(client)">{{client}}</a></li>
+                </ul>
+          </div>
+          <ul class="action-filter">
+            <li [ngClass]="{'active': selectedItem == 'All'}"><a href="javascript:void(0);" (click)="StatusFilter('All')">All</a></li>
+            <li [ngClass]="{'active': selectedItem == 'Active'}"><a href="javascript:void(0);" (click)="StatusFilter('Active')">Active</a></li>
+            <li [ngClass]="{'active': selectedItem == 'Inactive'}"><a href="javascript:void(0);" (click)="StatusFilter('Inactive')">Inactive</a></li>
+            <!-- <li [ngClass]="{'active': selectedItem == 'Invited'}"><a href="javascript:void(0);" (click)="StatusFilter('Invited')">Invited</a></li> -->
+          </ul>
+        </div>
+      </div>
+      <div class="manage-user-web user-table-1">
+        <ul class="project-table-ul panel-section">
+          <li>
+            <div class="row-main title-row own-clear">
+              <div class="tr tr1"><input type="checkbox" name="check"></div>
+              <div class="tr tr2">User</div>
+              <div class="tr tr2">Email</div>
+              <div class="tr tr7">Status</div>
+              <div class="tr tr9">Actions</div>
+            </div>
+          </li>
+          <li *ngFor="let User of pagedItems">
+            <div class="row-main own-clear">
+              <div class="tr tr1">
+                <input type="checkbox" name="check" class="tr-checkbox">
+              </div>
+              <div class="tr tr2">
+                <h5 class="project-title">{{User.Name}}</h5>
+              </div>
+              <div class="tr tr7" [innerHtml]="ApplyStatus(User.IsBlocked)">
+                <a href="javascript:void(0);">--</a>	
+              </div>
+              <div class="tr tr8">
+
+                <!-- <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="" class="ph-phone ph" data-original-title="User.PhoneNumber"><i class="fa fa-phone" aria-hidden="true"></i></a> -->
+                <!-- <label data-toggle="tooltip" data-placement="top" title="" class="ph-phone ph" data-original-title="User.PhoneNumber"><i class="fa fa-phone" aria-hidden="true"></i></label> -->
+              </div>
+              <div class="tr tr9">
+                <!-- <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="" class="ph-times ph" data-original-title="Delete User"><i class="fa fa-user-times" aria-hidden="true"></i></a> -->
+                <a class="action-label delete-lab" data-toggle="tooltip" data-placement="top" title="Delete" class="ph-times ph" (click)="onArchiveUser(User.Email)" href="javascript:void(0);"><i class="fas fa-user-times" aria-hidden="true"></i></a>
+                <a href="javascript:void(0);" *ngIf="!User.IsBlocked" data-toggle="tooltip" data-placement="top" title="Block" class="ph-lock ph" (click)="onBlockUser(User.Email)" href="javascript:void(0);"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                <a href="javascript:void(0);" *ngIf="User.IsBlocked" data-toggle="tooltip" data-placement="top" title="Unblock" class="ph-lock ph" (click)="onUnblockUser(User.Email)" href="javascript:void(0);"><i class="fa fa-unlock" aria-hidden="true"></i></a>	
+              </div>
+            </div> <!-- Row Main Ends -->
+          </li>
+    
+        </ul>
+    
+        <div class="pagination-tab own-clear">
+          <div class="page-notify">
+            <p>10 Per Page</p>
+          </div>
+          
+          <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(1)">&laquo;</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+              </li>
+              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                  <a (click)="setPage(page)">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.currentPage + 1)">Next</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.totalPages)">&raquo;</a>
+              </li>
+          </ul>
+          
+        </div>
+    
+      </div>
+    </div>
+    
+    
+    
+    
+    
+    <div id="ag-user" class="modal fade" role="dialog" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content onecolumn clearfix">      
+            <div class="modal-body">
+              <div class="aguser-title">
+                <h4>INVITE AGENCY USER</h4>
+                <p>For inviting new users to Flock App, Select the role (role the new users should have) and enter the email addresses of the new users. An invitation with link to registeration will be send to the invited users</p>
+              </div>
+              <div class="aguser-agrole own-clear">
+                <div class="glow-form">
+                  <h5>Agency</h5>
+                  <input type="text" name="agency" class="ag-type" placeholder="The Glow Agency">
+                </div>
+                <div class="glow-form rg-border own-clear">
+                  <h5>Role</h5>
+                  <ul>
+                    <li class="active"><a href=""><i class="fa fa-user" aria-hidden="true"></i> User</a></li>
+                    <li><a href=""><img src="images/crown.png"> Admin</a></li>
+                  </ul>
+                </div>
+                <div class="glow-form">
+                  <h5>Email Address</h5>
+                  <input type="text" id="demo" name="email" value= '["testingemail@yahoo.com","newuser@yahoo.com"]'>
+                </div>
+                <div class="glowinner-button own-clear">
+                  <a href="#" class="in-users">Invite Users</a>
+                  <a href="#" class="cl-users" data-dismiss="modal">Close</a>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>

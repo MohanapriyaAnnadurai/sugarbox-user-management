@@ -1,0 +1,33 @@
+<div class="dashboard-header">
+	<div class="own-clear">
+		<div class="logo-img">
+			<div  *ngIf="UsersDetail.UserRole=='Super User'" class="settings-drop dropdown">
+			  <a id="dLabel" class="setting-icon" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			    <!-- <img src="images/setting.png"> -->
+			  </a>
+			</div>
+		</div>
+		<div class="agency-menu">
+			<ul class="main-menu ft-reg">
+				
+				<li *ngIf="UsersDetail.UserRole=='Super User'" class="dropdown" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+					<a id="menuLabel1" [routerLink]="['/users']" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						Manage Users
+				    <span class="caret-drop"></span>
+				  	</a>
+				</li>
+			</ul>
+		</div>
+		<div class="user-menu">
+			<div class="user-info">
+				<h5 class="ft-sbold">{{UsersDetail.FirstName}}</h5>
+				
+				<a href="javascript:void(0);" id="menuLabel1" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span></a>
+				<p>Version {{Version}}</p>
+				<ul class="dropdown-menu" aria-labelledby="menuLabel1">
+					    <li><a href="javascript:void(0);" [routerLink]="['/login']">Logout</a></li>
+					</ul>
+			</div>
+		</div>
+	</div>
+</div>

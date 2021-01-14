@@ -1,0 +1,68 @@
+  <div class="board-wrapper login-wrapper">
+      <div class="logo-form-sec">
+    <div class="scope-logo"><img src="assets/images/scope-logo.png" /></div>
+    <div class="flock-logo"><img src="assets/images/scope-flock.png" /></div>
+        </div>
+    <div class="login-form">
+    <!-- <alert></alert> -->
+      <div class="logo-log">
+      <img src="assets/images/flock-logo-b.png" />
+        <h4>AGENCY SCOPING TOOL</h4>
+        <h6>Connecting Advertisers, Agencies and Flock in a Digital Space</h6>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h4>Enter registered Email ID</h4>
+    
+        <div class="form-group">
+          <label class="control-label">Email Address</label>
+        <input type="text" formControlName="username" (keypress)="AvoidSpace($event)" class="form-control" [(ngModel)]="forgot.Email" value="" />
+          <div *ngIf="submitted && f.username.errors" class="formError">
+            <div *ngIf="f.username.errors.required">Email is required</div>
+            <div *ngIf="f.username.errors.email">Email must be a valid email address</div>
+        </div>
+        </div>
+      <div class="form-group">
+        <label class="control-label">Security Question 1</label>
+
+        <select class="form-control" formControlName="q1" [(ngModel)]="forgot.q1">
+          <option value="">Please select Security Question 1</option>
+          <option *ngFor="let Q of ressecurityquestions" value="{{Q.Id}}">{{Q.Question}}</option>
+        </select>
+        <div *ngIf="submitted && f.q1.errors" class="formError">
+          <div *ngIf="f.q1.errors.required">Please select Security Question 1</div>
+      </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Security Answer 1</label>
+        <textarea class="form-control" (keydown)="AvoidFirstSpace($event)" formControlName="a1" placeholder="Provide Your Answer" [(ngModel)]="forgot.a1"></textarea>
+          <div *ngIf="submitted && f.a1.errors" class="formError">
+            <div *ngIf="f.a1.errors.required">Please enter Answer 1</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Security Question 2</label>
+
+        <select class="form-control" formControlName="q2" [(ngModel)]="forgot.q2">
+          <option value="">Please select Security Question 2</option>
+          <option *ngFor="let Q of ressecurityquestions" value="{{Q.Id}}">{{Q.Question}}</option>
+        </select>
+        <div *ngIf="submitted && f.q2.errors" class="formError">
+          <div *ngIf="f.q2.errors.required">Please select Security Question 2</div>
+      </div>
+      </div>
+      <div class="form-group">
+
+        <label class="control-label">Security Answer 2</label>
+        <textarea class="form-control" (keydown)="AvoidFirstSpace($event)" formControlName="a2" placeholder="Provide Your Answer" [(ngModel)]="forgot.a2"></textarea>
+          <div *ngIf="submitted && f.a2.errors" class="formError">
+            <div *ngIf="f.a2.errors.required">Please enter Answer 2</div>
+        </div>
+      </div>
+        <a class="forgot-password" [routerLink]="['/login']">Login</a>
+        <div class="clearfix"></div>
+        <button [disabled]="loadingForgot" class="btn btn-login">Send</button>
+        <img *ngIf="loadingForgot" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      </form>
+    </div>
+</div>
