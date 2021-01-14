@@ -1,0 +1,27 @@
+
+<div class="board-wrapper login-wrapper form-wraps">
+  <div class="login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label class="control-label">Email Address</label>
+        <input type="email" formControlName="username" class="form-control" value="" (keydown.space)="$event.preventDefault();">
+        <div *ngIf="submitted && f.username.errors" class="formError">
+          <div *ngIf="f.username.errors.required">Email is required</div>
+          <div *ngIf="f.username.errors.email">Email must be a valid email address</div>
+      </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Password</label>
+        <input type="password" formControlName="password" class="form-control" value="" (keydown.space)="$event.preventDefault();">
+        <div *ngIf="submitted && f.password.errors" class="formError">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+      </div>
+      </div>
+      <a class="forgot-password" [routerLink]="['/forgot']"><span><img src="assets/images/padlock.png"></span>Forgot Password?</a>
+      <div class="clearfix"></div>
+      <button [disabled]="loading" class="btn btn-login">Sign In</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </form>
+  </div>
+</div>
+
